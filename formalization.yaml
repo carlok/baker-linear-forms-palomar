@@ -1,0 +1,192 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/mathlib-initiative/formalization.yaml/main/schema/formalization.schema.json
+# formalization.yaml v0.4
+version: v0.4
+project:
+  name: Baker's theorem on linear forms in logarithms, and the Schneider–Lang criterion for ℂ^{d₀}
+    × (ℂ^×)^{d₁} with d₀ ≤ 1
+  description: 'Baker''s theorem (Baker 1966). If l₁, …, lₙ are logarithms of algebraic numbers, linearly
+    independent over ℚ, then 1, l₁, …, lₙ are linearly independent over the algebraic numbers: b₀
+    + b₁ l₁ + ⋯ + bₙ lₙ ≠ 0 for algebraic b₀, …, bₙ not all zero. The criterion of Schneider–Lang
+    for ℂ^{d₀} × (ℂ^×)^{d₁}, d₀ ≤ 1 (Waldschmidt 2000, Corollary 4.2). Let n = |ι|, let x₁, …, x_{d₁}
+    ∈ ℂⁿ have algebraic coordinates and be linearly independent over ℚ, let y₁, …, yₙ be a basis of
+    ℂⁿ, and if d₀ = 1 let the k-th coordinates of the yⱼ be algebraic. If n < d₀ + d₁, then the numbers
+    exp ⟨xᵢ, yⱼ⟩ are not all algebraic. This repository is a self-contained extract of these theorems
+    from the library github.com/carlok/diaz-modulus-lean, which is the canonical home of the proofs.'
+  authors:
+  - Carlo Perassi
+  license: Apache-2.0
+  responsible_maintainers:
+  - Carlo Perassi
+classification:
+  arxiv:
+  - math.NT
+  - cs.LO
+  msc2020:
+  - 11J86
+  - 11J81
+  - 68V20
+sources:
+- title: Linear forms in the logarithms of algebraic numbers I
+  authors:
+  - Alan Baker
+  type: paper
+  location: Mathematika 13 (1966), 204–216
+  relationship: formalizes
+  note: Baker's theorem. The Lean statement is the form with a constant term b₀ given as Theorem 1.6
+    of Waldschmidt 2000.
+  license: unknown
+  author_endorsement: n/a
+- title: Diophantine Approximation on Linear Algebraic Groups
+  authors:
+  - Michel Waldschmidt
+  type: book
+  location: Grundlehren der mathematischen Wissenschaften 326, Springer, 2000
+  relationship: formalizes
+  note: 'Chapter 4. The Lean proof follows §4.6 (Theorem 4.5 for a basis of a number field, Proposition
+    4.7, Corollary 4.2) with one repair: step 5 uses vanishing to a given total order, which survives
+    the change of variables, instead of vanishing to a given order in each coordinate; only the constants
+    change.'
+  license: unknown
+  author_endorsement: n/a
+- title: Linear forms in elliptic integrals
+  authors:
+  - Daniel Bertrand
+  - David W. Masser
+  type: paper
+  location: Inventiones Mathematicae 58 (1980), 283–288
+  relationship: background
+  note: The route from the Schneider–Lang criterion to Baker's theorem that Waldschmidt's Chapter
+    4 follows.
+  license: unknown
+  author_endorsement: n/a
+related_formalizations:
+- id: https://github.com/carlok/diaz-modulus-lean
+  relationship: other
+  note: The canonical home of these proofs, by the same author, and of a wider library on Diaz's conjecture.
+    This repository copies the import closure of the compared theorems (35 modules, at commit 465147a3ec8bec43ad0046c1f3ccdfc41afc88cf)
+    with only the changes the Lean module system needs, so that they can be checked on their own.
+    The module paths and namespaces are those of the library. Corrections are made there first.
+- id: https://github.com/mkaratarakis/mathlib4/tree/baker
+  relationship: independent
+  note: M. Karatarakis's Lean formalisation of Baker's theorem along the same chapter, on a public
+    branch of his Mathlib fork since 2026-09-25, for every d₀ and with the same repair of step 5.
+    Cited as related work; nothing here was taken from it.
+- id: https://github.com/leanprover-community/mathlib4/pull/28013
+  relationship: other
+  note: The module Diaz.LindemannWeierstrass in this extract is ported from this unmerged Mathlib
+    pull request (Lindemann–Weierstrass), with credit to its authors. It lies in the import closure
+    through Diaz.Axioms; the compared theorems are not taken from it.
+- id: https://palomar-registry.org/entry?id=PALOMAR-2026-11-22-000020&version=1
+  relationship: other
+  note: The six exponentials theorem from the same library, registered separately by the same author
+    on 2026-11-22. It is not compared again here.
+status:
+  scope: 'Formalized and compared: BakerLinearForms.baker_linear_forms_in_logarithms (Baker 1966;
+    in the form of Waldschmidt 2000, Theorem 1.6); BakerLinearForms.schneider_lang_cartesian (Waldschmidt
+    2000, Corollary 4.2, case d₀ ≤ 1, by the direct proof of §4.6). Not formalized: The Schneider–Lang
+    criterion for d₀ ≥ 2; Baker''s quantitative lower bounds for linear forms in logarithms; the p-adic
+    analogue.'
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms:
+  - propext
+  - Classical.choice
+  - Quot.sound
+  main_results:
+  - declaration: BakerLinearForms.baker_linear_forms_in_logarithms
+    file: Solution.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+  - declaration: BakerLinearForms.schneider_lang_cartesian
+    file: Solution.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+  - declaration: Transcendence.baker_linear_forms_in_logarithms
+    file: Diaz/Mirror/baker_linear_forms_in_logarithms.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+  - declaration: Transcendence.schneider_lang_cartesian
+    file: Diaz/Mirror/schneider_lang_cartesian.lean
+    sorry_count: 0
+    axioms:
+    - propext
+    - Classical.choice
+    - Quot.sound
+automation:
+  methods:
+  - method: agent
+    models:
+    - Claude (Anthropic); the model version was not recorded per proof
+    framework: Claude Code
+    tool_setup: Claude agents (Anthropic) wrote the Lean statements and proofs under Carlo Perassi's
+      direction, one statement at a time, and submitted them to the Prove2Me platform (https://prove2.me),
+      which checked and accepted them. They were then mirrored into diaz-modulus-lean. The proofs
+      use ordinary Mathlib tactics and terms; there is no native_decide.
+    cost:
+      wall_time: not tracked
+      spend_usd: not tracked
+      hardware: local machine
+    prompting_notes: not recorded
+  - method: agent
+    models:
+    - Claude Opus 5.5
+    framework: Claude Code
+    tool_setup: 'A Claude agent made this extract under Carlo Perassi''s direction: it copied the
+      35 modules of the import closure from diaz-modulus-lean, made the module-system changes, and
+      wrote Challenge.lean, Solution.lean, this file, the README and the CI workflow.'
+    cost:
+      wall_time: not tracked
+      spend_usd: not tracked
+      hardware: cloud workspace
+    prompting_notes: not recorded
+  spend_usd: not tracked
+  notes: 'The Lean code and the texts in this repository were written by Claude agents (Anthropic)
+    under the direction of Carlo Perassi, who is responsible for them. No claim rests on an assertion
+    by a language model: the proofs are checked by Lean''s kernel at the pinned toolchain, and the
+    axioms of the compared theorems are audited in CI.'
+fidelity:
+  divergences: 'None known. Each Challenge statement is written with Mathlib''s notions only. l :
+    Fin n → ℂ is the family l₁, …, lₙ; hlalg says each exp (l i) is algebraic over ℚ, so each l i
+    is a logarithm of an algebraic number (any branch). LinearIndependent ℚ l is Mathlib''s linear
+    independence over ℚ. b₀ and b i are algebraic over ℚ and not all zero (hne); the conclusion is
+    b₀ + ∑ i, b i * l i ≠ 0. ι indexes the coordinates of ℂⁿ, n = Fintype.card ι; x i : ι → ℂ and
+    y j : ι → ℂ are vectors. hxalg and hxind: the d₁ vectors x i have algebraic coordinates and are
+    linearly independent over ℚ; hy: the n vectors y j are linearly independent over ℂ. ι₀ : Option
+    ι encodes d₀ ∈ {0, 1}: none is d₀ = 0; some k is d₀ = 1 with the algebraic coordinate k (hy₀).
+    ι₀.elim 0 (fun _ => 1) is d₀, and hdim is n < d₀ + d₁. hexp says every exp (∑ ν, x i ν * y j ν)
+    is algebraic; the conclusion is False. The compared theorems live in the namespace BakerLinearForms
+    and the library theorems keep their library names; the statements are the same up to unfolding
+    the library''s abbreviations.'
+review:
+  status: machine-checked; no human expert review of the Lean
+  reviewers: []
+  notes: 'Checks made: the Prove2Me platform checked and accepted the proofs when they were first
+    submitted, and diaz-modulus-lean builds them in CI with leanprover/lean4:v4.36.0 and Mathlib v4.36.0.
+    This repository''s CI builds the extract, audits the axioms with #print axioms, and runs the toolchain''s
+    lake comparator. No mathematician has reviewed the Lean code, and the Challenge statements have
+    not been reviewed against the sources by anyone independent of their authors.'
+alignment:
+  namespace: BakerLinearForms
+  statements:
+  - source: Baker 1966; in the form of Waldschmidt 2000, Theorem 1.6
+    lean: BakerLinearForms.baker_linear_forms_in_logarithms
+    module: Challenge
+    status: proved
+    note: Proved by the library theorem Transcendence.baker_linear_forms_in_logarithms.
+  - source: Waldschmidt 2000, Corollary 4.2, case d₀ ≤ 1, by the direct proof of §4.6
+    lean: BakerLinearForms.schneider_lang_cartesian
+    module: Challenge
+    status: proved
+    note: Proved by the library theorem Transcendence.schneider_lang_cartesian.
+acknowledgements: 'The Mathlib community, for Lean 4 and Mathlib; the authors of Mathlib pull request
+  #28013 (Lindemann–Weierstrass), whose code is ported in the library; and the Prove2Me platform,
+  where the proofs were first submitted and checked.'
